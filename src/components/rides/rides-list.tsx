@@ -15,14 +15,14 @@ const RidesList = () => {
   const client = new Client()
 
   client
-    .setEndpoint('https://console.hoppla.autos/v1') // Your API Endpoint
-    .setProject('66688eaa0009496c2951');
+    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!) // Your API Endpoint
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!) // Your project ID;
 
   const databases = new Databases(client);
 
   const listRides = async () => {
     try {
-      const response = await databases.listDocuments('666cc4df003bbef8717f', '666cc4ef000dc0957fd2');
+      const response = await databases.listDocuments(process.env.NEXT_PUBLIC_DB_ID!, '666dfea6000a8199120c');
       setRides(response.documents as unknown as Document[]);
     } catch (error) {
       console.error(error);
@@ -39,7 +39,7 @@ const RidesList = () => {
       <h1 className="text-3xl font-bold">Rides</h1>
       <ul className="mt-8">
         {rides.map((ride) => (
-          <li key={ride.$id} className="flex items-center justify-between w-full p-4 my-2 bg-gray-800 rounded-md">
+          <li key={ride.$id} className="flex items-center justify-between w-full p-4 my-2 bg-gray-200 rounded-md">
             <p>{ride.from} - {ride.to}</p>
           </li>
         ))}
