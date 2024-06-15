@@ -1,7 +1,7 @@
 import { AppwriteService } from "@/lib/client/appwrite";
 import { Account, adminClient } from "@/lib/server/appwrite";
 import { NextApiRequest } from "next";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -36,6 +36,7 @@ export async function GET(request: NextApiRequest, response: any) {
       session.$id
     )
 
+    revalidateTag('user');
     revalidatePath('/');
     return NextResponse.redirect(url, { status: 302 });
   } catch (error) {
