@@ -11,7 +11,6 @@ export async function GET() {
       process.env.NEXT_PUBLIC_FAILURE_URL, // Failure URL
       ['repo', 'user'] // scopes (optional)
     );
-
     return NextResponse.redirect(redirectUrl);
   } catch (error) {
     console.error(error);
