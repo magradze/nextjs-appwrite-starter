@@ -2,7 +2,7 @@ import { createSessionClient } from "@/lib/server/appwrite";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const { account } = await createSessionClient(request);
+  const { account } = await createSessionClient();
 
   try {
     const user = await account.get();
