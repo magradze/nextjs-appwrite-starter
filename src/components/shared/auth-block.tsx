@@ -3,29 +3,27 @@ import { Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLogOut } from "@/hooks/useAuth";
 import Link from "next/link";
+import LabelStatus from "./label-status";
+import { cn } from "@/lib/utils";
 
 interface AuthBlockProps {
   user: any;
-  // handleLogout: () => void;
+  handleLogout: () => void;
 }
 
-const AuthBlock = ({user}: AuthBlockProps) => {
-  const {data, error, isLoading, mutate} = useLogOut();
-
-  if (isLoading) return <p>Loading...</p>;
-  // if (error) return <p>Error: {error.}</p>;
-  
-  const handleLogout = () => {
-    mutate();
-  };
-
+const AuthBlock = ({user, handleLogout}: AuthBlockProps) => {
   return (
     <>
     {user ? (
             <div className="flex flex-row gap-4 items-center">
-              <a href="/account" className="navbar-item">
+              <Link href="/account" className={cn(
+                'flex flex-row items-center gap-2 bg-gray-100 px-2 py-1 rounded-md text-xs',
+                user.emailVerification && 'border border-amber-500',
+              )}>
                 {user.name}
-              </a>
+                <LabelStatus labels={user.labels} />
+                {/* {user.labels && user.labels.includes("admin") && <span className="bg-red-500 text-white px-2 py-1 rounded-md text-xs">Admin</span>} */}
+              </Link>
               <Button onClick={() => handleLogout()}>Logout</Button>
             </div>
           ) : (
