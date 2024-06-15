@@ -1,9 +1,6 @@
 import { Client, Account, OAuthProvider, Databases } from 'node-appwrite';
 import {cookies} from 'next/headers';
 
-const ENDPOINT = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!;
-const PROJECT_ID = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!;
-const APPWRITE_API_KEY = process.env.NEXT_PUBLIC_APPWRITE_API_KEY!;
 
 const adminClient = new Client()
     .setEndpoint(ENDPOINT)
@@ -51,10 +48,19 @@ const getLoggedInUser = async () => {
   }
 }
 
+const logOut = async () => {
+  const { account } = await createAdminClient();
+  console.log(
+    account.getSession('current')
+  );
+  // await account.deleteSession('current');
+};
+
 export {
   createAdminClient,
   createSessionClient,
   getLoggedInUser,
+  logOut,
   adminClient,
   Client,
   Account,
