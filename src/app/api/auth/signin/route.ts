@@ -17,6 +17,8 @@ export async function POST(request: Request) {
       path: "/",
     });
 
+    await account.createVerification(`${process.env.NEXT_PUBLIC_SITE_URL}/auth/verify`);
+
     return new Response(JSON.stringify(session), {
       status: 200,
       headers: {
