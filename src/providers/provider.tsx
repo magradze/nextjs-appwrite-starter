@@ -1,4 +1,5 @@
 "use client";
+import { AuthProvider } from '@/context/AuthContext';
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -6,7 +7,7 @@ interface ProviderProps {
   children: ReactNode;
 }
 
-const Provider = ({children}: ProviderProps) => {
+const Provider = ({ children }: ProviderProps) => {
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -19,7 +20,9 @@ const Provider = ({children}: ProviderProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <AuthProvider>
+        {children}
+      </AuthProvider>
     </QueryClientProvider>
   );
 };
