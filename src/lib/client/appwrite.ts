@@ -1,4 +1,4 @@
-import { Client, Account, OAuthProvider, Databases, Avatars } from 'appwrite';
+import { Client, Account, OAuthProvider, Databases, Avatars, ID } from 'appwrite';
 
 export const client = new Client();
 export const database = new Databases(client);
@@ -7,8 +7,8 @@ client
   .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT as string)
   .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT as string);
 
-const account = new Account(client);
-const avatars = new Avatars(client);
+export const account = new Account(client);
+export const avatars = new Avatars(client);
 // export { ID, OAuthProvider } from 'appwrite';
 
 export const AppwriteService = {
@@ -46,3 +46,5 @@ export const AppwriteService = {
     }
   },
 };
+
+export { ID, OAuthProvider}
